@@ -10,9 +10,9 @@ import game_functions as gf
 def run_game():
     #init game and create a screen object
     pygame.init()
-    ai_setting = Settings()
+    ai_settings = Settings()
     screen = pygame.display.set_mode(
-            (ai_setting.screen_width, ai_setting.screen_height))
+            (ai_settings.screen_width, ai_settings.screen_height))
     
     pygame.display.set_caption("Alien Invasion")
     
@@ -21,11 +21,8 @@ def run_game():
     # begin to game
     while True:
         gf.check_events()
+        gf.update_screen(ai_settings, screen, ship)
         
-        screen.fill(ai_setting.bg_color)
-        ship.blitme()
-        
-        pygame.display.flip()
         
 run_game()
 
