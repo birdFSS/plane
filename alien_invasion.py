@@ -9,6 +9,16 @@ from settings import Settings
 import game_functions as gf
 from pygame.sprite import Group
 
+def update_bullets(ai_settings, bullets):
+    bullets.update()
+    for bullet in bullets.copy():
+        if (bullet.rect.bottom <= 0 or 
+            bullet.rect.left <= 0 or
+            bullet.rect.top >= ai_settings.screen_height or
+            bullet.rect.right >= ai_settings.screen_width):
+                
+            bullets.remove(bullet)
+
 def run_game():
     #init game and create a screen object
     pygame.init()
@@ -27,7 +37,8 @@ def run_game():
     while True:
         gf.check_events(ai_settings, screen, ship, bullets)
         ship.update()
-        bullets.update()
+        update_bullets(ai_settings, bullets)
+        #print(len(bullets))
         gf.update_screen(ai_settings, screen, ship, bullets)
         
         
